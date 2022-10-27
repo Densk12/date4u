@@ -1,0 +1,139 @@
+@import "~bootswatch/dist/quartz/variables";
+@import "components";
+@import "variables";
+@import "~bootstrap/scss/mixins/breakpoints";
+
+.content {
+    margin-top: 20px;
+    padding-top: 50px;
+}
+
+.birthday-container {
+    input {
+        background-color: transparent !important;
+        color: white;
+        width: 50%;
+        height: 40px;
+        border: none;
+        outline: none;
+        margin-top: -10px;
+        text-indent: 10px;
+    }
+}
+
+.horn-container {
+    margin-top: 20px;
+
+    select {
+        background-color: transparent;
+        color: white;
+        width: 50%;
+        height: 40px;
+        border: none;
+        outline: none;
+        margin-top: -10px;
+        text-indent: 10px;
+
+        option {
+            color: black;
+        }
+    }
+}
+
+.gender-container {
+    @include vertical-label-select;
+    margin-top: 100px;
+}
+
+.interest-in-gender {
+    @include vertical-label-select;
+    margin-top: 10px;
+}
+
+textarea {
+    resize: none;
+    margin-top: 10px;
+    border: none;
+}
+
+#profile-carousel {
+    width: 80%;
+
+    @include media-breakpoint-up(sm) {
+        margin-top: 80px;
+    }
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    margin-top: 50px;
+
+    .butt-container {
+        margin-top: 30px;
+    }
+}
+
+.nickname-container {
+    margin-top: 20px;
+
+    input {
+        background-color: transparent !important;
+        color: white;
+        width: 50%;
+        height: 40px;
+        border: none;
+        outline: none;
+        text-indent: 10px;
+
+        &::placeholder {
+            color: white;
+            opacity: 0.8;
+        }
+    }
+}
+
+.like-container {
+    margin-top: 20px;
+
+    i {
+        font-size: 3rem;
+
+        &.animated {
+            animation: wobble-anim 1s ease infinite;
+    
+            @keyframes wobble-anim {
+                0% {
+                    transform: none;
+                }
+    
+                15% {
+                    transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+                }
+    
+                30% {
+                    transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+                }
+    
+                45% {
+                    transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+                }
+    
+                60% {
+                    transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+                }
+    
+                75% {
+                    transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+                }
+    
+                100% {
+                    transform: none;
+                }
+            }
+        }
+    }
+}
+

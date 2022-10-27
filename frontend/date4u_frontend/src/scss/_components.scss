@@ -1,0 +1,23 @@
+@mixin vertical-label-select {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+        margin-right: 20px;
+        margin-top: 7px;
+    }
+
+    select {
+        background-color: transparent;
+        color: white;
+        min-width: 50%;
+        height: 40px;
+        border: none;
+        outline: none;
+        text-indent: 10px;
+
+        option {
+            color: black;
+        }
+    }
+}

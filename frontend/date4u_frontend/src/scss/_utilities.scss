@@ -1,0 +1,7 @@
+@mixin disable_link {
+    text-decoration: none;
+
+    &:hover {
+        color: white;
+    }
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.0/dist/quartz/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid">
+            <div class="navbar-nav">
+                <a class="navbar-brand" href="#">Date4u</a>
+                <a class="nav-item nav-link" href="index">Home</a>
+                <a class="nav-link nav-item" href="profile">Profile</a>
+                <a class="nav-link nav-item" href="search">Search</a>
+            </div>
+        </div>
+    </nav>
+    <div class="jumbotron">
+        <h1 class="display-4">Willkommen</h1>
+    </div>
+
+    <div class="container">
+        <p>19% von 200 sind <span data-th-text="0.19*200"></span></p>
+        <p data-th-text="|Es gibt ${totalProfiles} Profile in der Datenbank.|">1234</p>
+<!--        <p>Es gibt [[${totalProfiles}]] Profile in der Datenbank.</p>-->
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

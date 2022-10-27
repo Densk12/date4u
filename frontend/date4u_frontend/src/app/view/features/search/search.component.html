@@ -1,0 +1,111 @@
+<div id="searchPage" class="container">
+    <div class="nav-header shadow rounded-3">
+        <nav class="nav">
+            <div class="nav__element">
+                <a class="nav-link" [routerLink]="['/profile']">Profil</a>
+                <i class="fa-regular fa-user"></i>
+            </div>
+
+            <div class="nav__element">
+                <a class="nav-link disabled" [routerLink]="['/search']">Suche</a>
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            <div class="nav__element">
+                <a class="nav-link" [routerLink]="['/login']" (click)="onLogoutClicked()">Abmelden</a>
+                <i class="fa-sharp fa-solid fa-arrow-right-from-bracket"></i>
+            </div>
+        </nav>
+    </div>
+
+    <div class="main">
+        <div class="header-content">
+            <p class="display-6">Einhörner suchen...</p>
+        </div>
+
+        <div class="filter">
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Im Alter von</p>
+                    <div class="line">
+                        <select (change)="onAgeStartSelected($event)" class="rounded-3 shadow">
+                            <option [value]="age" *ngFor="let age of ages">{{age}} Jahren</option>
+                        </select>
+                        <p>bis</p>
+                        <select id="age-end-select" (change)="onAgeEndSelected($event)" class="rounded-3 shadow">
+                            <option [value]="age" *ngFor="let age of ages">{{age}} Jahren</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <p>Mit einer Hornlänge von</p>
+                    <div class="line">
+                        <select (change)="onHornlengthStartSelected($event)" class="rounded-3 shadow">
+                            <option [value]="hl" *ngFor="let hl of hornlengths">{{hl}} cm</option>
+                        </select>
+                        <p>bis</p>
+                        <select id="hornlength-end-select" (change)="onHornlengthEndSelected($event)"
+                            class="rounded-3 shadow">
+                            <option [value]="hl" *ngFor="let hl of hornlengths">{{hl}} cm</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 gender-container">
+                    <p>Geschlecht</p>
+                    <div>
+                        <select id="age-end-select" (change)="onAgeEndSelected($event)" class="rounded-3 shadow">
+                            <option [value]="i" *ngFor="let g of genders, let i = index">{{g}}</option>
+                        </select>
+                        <button type="button" class="btn btn-primary shadow" (click)="onSearchNowButtonClicked()">Jetzt
+                            suchen!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="result" *ngIf="siteEnd > 0">
+            <div class="header">
+                <p><b>Treffer {{siteCurrent}}-{{siteEnd}} (von insgesamt {{countAllProfiles}})</b></p>
+            </div>
+            <div class="profiles">
+                <div class="row" *ngFor="let pr of profileRows">
+                    <div class="col-md-3" *ngFor="let p of pr.profiles">
+                        <a [routerLink]="['/profile']">
+                            <div class="card shadow round-3">
+                                <img src="{{p.photo}}" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{p.nickname}}</h5>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Alter: <span>{{p.age}}</span></li>
+                                    <li class="list-group-item">Hornlänge: {{p.hornlength}} cm</li>
+                                </ul>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="no-result-container" *ngIf="siteEnd === 0">
+            <p><b>Keine Treffer!</b></p>
+        </div>
+    </div>
+
+    <div class="footer" *ngIf="siteEnd > 0">
+        <nav>
+            <ul class="pagination">
+                <li class="page-item" (click)="onPaginationPrevButtonClicked()">
+                    <a class="page-link" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li #butt (click)="onPaginationNumericButtonClicked(butt, i)" class="page-item numeric-page-item" *ngFor="let pb of countPaginationButtons; let i = index"><a class="page-link">{{pb}}</a></li>
+                <li class="page-item" (click)="onPaginationNextButtonClicked()">
+                    <a class="page-link" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

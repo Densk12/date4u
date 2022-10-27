@@ -1,0 +1,52 @@
+@import "utilities";
+
+header {
+    a {
+        @include disable-link;
+    }
+
+    i {
+        color: #FF66B2;
+        margin-left: 10px;
+        animation:
+            heartbeat-anim 1s linear infinite,
+            opacity-anim 2s linear;
+
+
+        @keyframes heartbeat-anim {
+            0% {
+                transform: scale(.75);
+            }
+
+            20% {
+                transform: scale(1);
+            }
+
+            40% {
+                transform: scale(.75);
+            }
+
+            60% {
+                transform: scale(1);
+            }
+
+            80% {
+                transform: scale(.75);
+            }
+
+            100% {
+                transform: scale(.75);
+            }
+        }
+
+        @keyframes opacity-anim {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    }
+}

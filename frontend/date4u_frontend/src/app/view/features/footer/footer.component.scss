@@ -1,0 +1,26 @@
+@import "utilities";
+@import "variables";
+@import "~bootstrap/scss/mixins/breakpoints";
+
+.container__div {
+    display: block;
+
+    @include media-breakpoint-up(sm) {
+        display: flex;
+    }
+}
+
+.copy {
+    margin: 0 auto;
+
+    a {
+        @include disable-link;
+    }
+}
+
+
+.impressum {
+    a {
+        @include disable-link;
+    }
+}

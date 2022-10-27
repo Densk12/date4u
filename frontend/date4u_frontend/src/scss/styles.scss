@@ -1,0 +1,82 @@
+/*
+|--------------------------------------------------------------------------
+| Variables
+|--------------------------------------------------------------------------
+*/
+@import "variables";
+
+/*
+|--------------------------------------------------------------------------
+| Bootstrap & Bootswatch
+|--------------------------------------------------------------------------
+*/
+@import "~bootswatch/dist/quartz/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/quartz/bootswatch";
+
+/*
+|--------------------------------------------------------------------------
+| Icons
+|--------------------------------------------------------------------------
+*/
+@import "~@fortawesome/fontawesome-free/css/all.css";
+
+/*
+|--------------------------------------------------------------------------
+| JSPicker
+|--------------------------------------------------------------------------
+*/
+@import '~js-datepicker/src/datepicker';
+
+/*
+|--------------------------------------------------------------------------
+| Generally
+|--------------------------------------------------------------------------
+*/
+@import "debug";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.nav-header {
+    margin: 0 2px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    position: relative;
+    height: 50px;
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+
+    .nav__element {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &:last-of-type {
+            position: absolute;
+            right: 20px;
+            top: 5px;
+        }
+    }
+}
+
+// footer hack
+
+html, body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 10 auto -80px; /* the bottom margin is the negative value of the footer's height */
+}
+
+.footer, .push {
+    height: 80px; /* .push must be the same height as .footer */
+}

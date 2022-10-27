@@ -1,0 +1,40 @@
+.debug {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    width: 4rem;
+    height: 2rem;
+    background-color: beige;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.1rem solid black;
+    font-size: 0.5rem;
+    font-weight: 600;
+    color: black;
+
+    &::after {
+        content: "xs (= 0)";
+
+        @include media-breakpoint-up(sm) {
+            content: "sm (= 576px)";
+        }
+
+        @include media-breakpoint-up(md) {
+            content: "md (= 768px)";
+        }
+
+        @include media-breakpoint-up(lg) {
+            content: "lg (= 992px)";
+        }
+
+        @include media-breakpoint-up(xl) {
+            content: "xl (= 1200px)";
+        }
+
+        @include media-breakpoint-up(xxl) {
+            content: "xxl (= 1400px)";
+        }
+    }
+}

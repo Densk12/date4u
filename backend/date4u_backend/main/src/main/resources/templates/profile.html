@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.0/dist/quartz/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid">
+            <div class="navbar-nav">
+                <a class="navbar-brand" href="#">Date4u</a>
+                <a class="nav-item nav-link" href="index">Home</a>
+                <a class="nav-link nav-item" href="profile">Profile</a>
+                <a class="nav-link nav-item" href="search">Search</a>
+            </div>
+        </div>
+    </nav>
+    <div class="jumbotron">
+        <h1 class="display-4">Profile</h1>
+    </div>
+
+    <div class="container">
+        <form data-th-object="${profile}" data-th-action="@{/save}" method="post">
+            <input type="text" data-th-field="*{id}" hidden>
+            <div class="mb-3">
+                <label for="nicknameInput" class="form-label">Nickname</label>
+                <input type="text" data-th-field="*{nickname}" id="nicknameInput"
+                       class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="hornlengthInput" class="form-label">Hornlänge</label>
+                <input type="text" data-th-field="*{hornlength}" id="hornlengthInput"
+                       class="form-control">
+                <div class="mb-3">
+                    <label for="genderInput" class="form-label">Geschlecht</label>
+                    <select data-th-field="*{gender}" id="genderInput">
+                        <option th:value="1" th:text="FEE"></option>
+                        <option th:value="2" th:text="MA"></option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Speichern</button>
+        </form>
+
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div data-th-each="photo,it : ${profile.getPhotos()}">
+                    <div data-th-if="${it} == 1" class="carousel-item active">
+                        <img class="d-block w-100" th:src="@{/api/photos/{id}(id=${photo})}">
+                    </div>
+                    <div data-th-unless="${it} == 1" class="carousel-item active">
+                        <img class="d-block w-100" th:src="@{/api/photos/{id}(id=${photo})}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

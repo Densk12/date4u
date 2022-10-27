@@ -1,0 +1,56 @@
+@import "~bootswatch/dist/quartz/variables";
+
+.form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 50px;
+
+    button {
+        background-color: $primary;
+        margin-top: 50px;
+    }
+
+    &__p {
+        margin-bottom: 50px;
+    }
+
+    .input-container {
+        position: relative;
+
+        label {
+            position: absolute;
+            pointer-events: none;
+            left: 24px;
+            top: 14px;
+            font-size: 1rem;
+            color: white;
+            transition: 0.2s ease all;
+        }
+
+        input {
+            font-size: 1rem;
+            padding-top: 15px;
+            height: 55px;
+            transition: 0.2s ease all;
+            border: none;
+        }
+
+        input:focus,
+        input:not(:focus):valid {
+            box-shadow: 0px 0px 6px 1px $primary;
+
+            &~label {
+                top: 2px;
+                font-size: 0.7rem;
+            }
+        }
+    }
+
+    i {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        font-size: 1.2rem;
+        transform: translateY(-0.6rem);
+    }
+}
