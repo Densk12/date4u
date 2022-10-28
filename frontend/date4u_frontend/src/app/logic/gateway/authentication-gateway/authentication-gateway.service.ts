@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscriber } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { UserLoginBorder } from '../../borderclasses/UserLoginBorder';
@@ -19,6 +19,30 @@ export class AuthenticationGatewayService {
   ) { }
 
   login(user: UserLoginBorder): Observable<boolean> {
+    // return new Observable<boolean>((subscriber: Subscriber<boolean>): void => {
+    //   fetch(`${environment.apiURL}/authenticate`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Accept': 'application/json',
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(user)
+    //   }).then((rawRsponse: any) => {
+    //     rawRsponse.json().then((jsonResponse: any) => {
+    //       console.log(jsonResponse);
+
+    //       const jwtAuthenticated: JwtAuthenticated = {
+    //         profileId: jsonResponse['profile-id'],
+    //         jwtToken: jsonResponse['jwt-token']
+    //       };
+
+    //       this.jwtRepo.createJwt(jwtAuthenticated);
+
+    //       subscriber.next(true);
+    //     });
+    //   }).catch((): void => subscriber.next(false));
+    // });
+
     return this.http.post(
       `${environment.apiURL}/authenticate`,
       user,

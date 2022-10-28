@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class Statistic {
-
   private final Logger log = LoggerFactory.getLogger( getClass() );
 
   @EventListener
