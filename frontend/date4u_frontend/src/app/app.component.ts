@@ -9,6 +9,5 @@ import { environment } from 'src/environments/environment';
 export class AppComponent {
   prod: boolean = environment.production;
 
-  AppComponent() {
-  }
+  constructor() {}
 }

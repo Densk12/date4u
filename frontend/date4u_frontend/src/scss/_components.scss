@@ -1,6 +1,7 @@
 @mixin vertical-label-select {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     p {
         margin-right: 20px;
@@ -11,7 +12,7 @@
         background-color: transparent;
         color: white;
         min-width: 50%;
-        height: 40px;
+        height: 55px;
         border: none;
         outline: none;
         text-indent: 10px;

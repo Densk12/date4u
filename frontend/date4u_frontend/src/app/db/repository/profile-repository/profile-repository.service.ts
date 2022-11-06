@@ -1,12 +1,11 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
-import { PhotoUpload } from 'src/app/logic/borderclasses/PhotoUpload';
-import { SearchFilter } from 'src/app/logic/borderclasses/SearchFilter';
-import { SearchResult } from 'src/app/logic/borderclasses/SearchResult';
 import { environment } from 'src/environments/environment';
 import { Photo } from '../../model/Photo';
 import { Profile } from '../../model/Profile';
+import { SearchFilter } from '../../model/SearchFilter';
+import { SearchResult } from '../../model/SearchResult';
 
 @Injectable({
   providedIn: 'root'
@@ -49,12 +48,12 @@ export class ProfileRepositoryService {
       `hornlength-start=${searchFilter.hornlengthStart}&hornlength-end=${searchFilter.hornlengthEnd}&` +
       `gender=${searchFilter.gender}&page=${searchFilter.page}&page-size=${searchFilter.pageSize}`,
       // header
-      { headers: new HttpHeaders({ accept: 'application/json' }) }
+      { headers: new HttpHeaders({ 'Accept': 'application/json' }) }
     ).pipe(
       map((jsonResponse: any): SearchResult => {
         const searchResult: SearchResult = {} as any;
 
-        searchResult.profiles = jsonResponse.profiles.map((pJSON: any) => {
+        searchResult.profilesPage = jsonResponse['profiles-page'].map((pJSON: any): Profile => {
           const profile: Profile = {
             id: pJSON.id,
             nickname: pJSON.nickname,
@@ -107,9 +106,8 @@ export class ProfileRepositoryService {
 
   createLikedProfileByProfileId(id: number, profileLikedId: number): Observable<boolean> {
     return this.http.post(
-      `${environment.apiURL}/profiles/${id}/likes`,
-      profileLikedId,
-      { headers: new HttpHeaders({ 'content-type': 'text/plain' }) }
+      `${environment.apiURL}/profiles/${id}/likes/${profileLikedId}`,
+      {}
     ).pipe(
       map((): boolean => true),
       catchError((errorResponse: HttpErrorResponse): Observable<boolean> => {
@@ -121,9 +119,9 @@ export class ProfileRepositoryService {
   getPhotosByProfileId(id: number): Observable<Photo[] | null> {
     return this.http.get(
       `${environment.apiURL}/profiles/${id}/photos`,
-      { headers: new HttpHeaders({ accept: 'application/json' }) }
+      { headers: new HttpHeaders({ 'Accept': 'application/json' }) }
     ).pipe(
-      map((jsonResponse: any): Photo[] => jsonResponse.map((photoJSON: any) => {
+      map((jsonResponse: any): Photo[] => jsonResponse.map((photoJSON: any): Photo => {
         const photo: Photo = {
           name: photoJSON.name,
           profilePhoto: photoJSON['profile-photo']
@@ -137,10 +135,14 @@ export class ProfileRepositoryService {
     );
   }
 
-  createPhotoByProfileId(id: number, photoUpload: PhotoUpload): Observable<boolean> {
+  createPhotoByProfileId(id: number, photo: File, profilePhoto: boolean): Observable<boolean> {
+    const formData: FormData = new FormData();
+    formData.append('image', photo, photo.name);
+    
     return this.http.post(
-      `${environment.apiURL}/profiles/${id}/photos`,
-      photoUpload
+      `${environment.apiURL}/profiles/${id}/photos?profile-photo=${profilePhoto}`,
+      formData,
+      { headers: new HttpHeaders({ 'Content-Type': 'multipart/form-data' }) }
     ).pipe(
       map((): boolean => true),
       catchError((errorResponse: HttpErrorResponse): Observable<boolean> => {
@@ -161,7 +163,29 @@ export class ProfileRepositoryService {
         'attracted-to-gender': profile.attractedToGender,
         description: profile.description
       },
-      { headers: new HttpHeaders({ 'content-type': 'application/json' }) }
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).pipe(
+      map((): boolean => true),
+      catchError((errorResponse: HttpErrorResponse): Observable<boolean> => {
+        return this.errorHandler<boolean>(errorResponse, false);
+      })
+    );
+  }
+
+  deleteProfileLiked(id: number, profileLikedId: number): Observable<boolean> {
+    return this.http.delete(
+      `${environment.apiURL}/profiles/${id}/likes/${profileLikedId}`
+    ).pipe(
+      map((): boolean => true),
+      catchError((errorResponse: HttpErrorResponse): Observable<boolean> => {
+        return this.errorHandler<boolean>(errorResponse, false);
+      })
+    );
+  }
+
+  deleteProfileById(id: number): Observable<boolean> {
+    return this.http.delete(
+      `${environment.apiURL}/profiles/${id}`
     ).pipe(
       map((): boolean => true),
       catchError((errorResponse: HttpErrorResponse): Observable<boolean> => {

@@ -15,11 +15,11 @@ public class JwtUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return unicornRepository
-                .findUnicornByEmail(username)
+                .findUnicornByEmail(email)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException(String.format("User with email '%s' not found.", username))
+                        new UsernameNotFoundException(String.format("User with email '%s' not found.", email))
                 );
     }
 }

@@ -1,0 +1,100 @@
+<div id="register-comp">
+    <div class="container">
+        <div class="form-container shadow rounded-3 mt-5">
+            <p class="form-container__p display-6">Registrieren</p>
+
+            <form #f="ngForm" (ngSubmit)="onSubmitButtonClicked(f, registerButton)">
+                <div class="mb-3 input-container">
+                    <input ngModel [email]="true" type="email" class="form-control shadow rounded-3" id="input-email"
+                        name="email" autocomplete="email" required>
+                    <label class="form-label" for="input-email">Email</label>
+                    <div class="form-text">Wir werden deine Email-Adresse mit niemandem teilen.</div>
+                </div>
+
+                <div class="mb-3 input-container">
+                    <input ngModel #passwordInput type="password" class="form-control shadow rounded-3" id="input-passwd"
+                        name="password" autocomplete="current-password" minlength="2" required>
+                    <label for="input-passwd" class="form-label">Passwort</label>
+                    <div (click)="onPasswordButtonClicked(passwordInput)">
+                        <i class="fa-sharp fa-solid fa-eye"></i>
+                    </div>
+                </div>
+
+                <div class="mb-3 input-container">
+                    <input ngModel #passwordInputRepeat type="password" class="form-control shadow rounded-3"
+                        id="input-passwd-repeat" name="password-confirmation" autocomplete="new-password" minlength="2"
+                        required>
+                    <label for="input-passwd" class="form-label">Passwort wiederholen</label>
+                    <div (click)="onPasswordButtonClicked(passwordInputRepeat)">
+                        <i class="fa-sharp fa-solid fa-eye"></i>
+                    </div>
+                </div>
+
+                <div class="mb-3 input-container">
+                    <input ngModel type="text" class="form-control shadow rounded-3" id="input-nickname" name="nickname"
+                        minlength="2" required>
+                    <label class="form-label" for="input-nickname">Nickname</label>
+                </div>
+
+                <div class="mb-3 input-container">
+                    <input #datePickerInput type="date" name="birthday" id="register-date-picker"
+                        class="form-control shadow rounded-3" [(ngModel)]="birthday">
+                    <label class="form-label" for="register-date-picker">Geburtstag</label>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-4 horn-container">
+                        <p>Hornlänge</p>
+                        <select #hornlenghtSelect name="hornlength" class="rounded-3 shadow" [(ngModel)]="hornlength">
+                            <option [value]="i" *ngFor="let i of hornlengths">{{i}} cm</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 gender-container">
+                        <p>Geschlecht</p>
+                        <select #genderSelect name="gender" class="rounded-3 shadow" [(ngModel)]="gender">
+                            <option [value]="i" *ngFor="let g of genders, let i = index;">{{g}}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 interest-in-gender">
+                        <p>Interesse am Geschlecht</p>
+                        <select #attractedGenderSelect name="attracted-to-gender" class="rounded-3 shadow" [(ngModel)]="attractedToGender">
+                            <option [value]="i" *ngFor="let g of genders, let i = index;">{{g}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3 new-photo-container shadow rounded-3">
+                    <label for="profile-upload-photo-input">Profilbild</label>
+                    <input ngModel name="photo" id="register-upload-photo-input" type="file" accept="image/jpeg" (change)="onProfilePhotoInputAdded($event)"
+                        required>
+                </div>
+
+                <div class="mb-3 input-container">
+                    <textarea ngModel id="register-description" minlength="2" name="description"
+                        class="form-control shadow rounded-3" rows="10" required></textarea>
+                    <label class="form-label" for="register-description">Hobbies / Freizeit / Interessen</label>
+                </div>
+
+                <div class="button-container">
+                    <button #registerButton type="submit"
+                        class="btn btn-secondary d-flex justify-content-center align-items-center shadow"
+                        [disabled]="!f.valid"><span class="butt-label">Jetzt registrieren!</span>
+
+                        <div class="spinner-border text-dark d-none" role="status">
+                            <span class="sr-only"></span>
+                        </div>
+                    </button>
+
+                    <div class="login-container"><a [routerLink]="['/login']">Login</a></div>
+                </div>
+            </form>
+        </div>
+
+        <div class="mt-3 error-container" *ngIf="errorMsg.length > 0">
+            <app-error [errorMsg]="errorMsg">
+            </app-error>
+        </div>
+    </div>
+</div>

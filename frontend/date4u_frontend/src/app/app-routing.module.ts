@@ -1,18 +1,28 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { IsAuthenticatedGuard } from './business_logic/service/is-authenticated-guard/is-authenticated.guard';
+import { IsNotAuthenticatedGuard } from './business_logic/service/is-not-authenticated-guard/is-not-authenticated.guard';
 
 const routes: Routes = [
   {
     path: 'login',
-    loadChildren: () => import('./view/features/login/login.module').then(m => m.LoginModule)
+    loadChildren: () => import('./view/page/login/login.module').then(m => m.LoginModule),
+    canActivate: [IsNotAuthenticatedGuard]
   },
   {
-    path: 'profile',
-    loadChildren: () => import('./view/features/profile/profile.module').then(m => m.ProfileModule)
+    path: 'register',
+    loadChildren: () => import('./view/page/register/register.module').then(m => m.RegisterModule),
+    canActivate: [IsNotAuthenticatedGuard]
+  },
+  {
+    path: 'profile/:id',
+    loadChildren: () => import('./view/page/profile/profile.module').then(m => m.ProfileModule),
+    canActivate: [IsAuthenticatedGuard]
   },
   {
     path: 'search',
-    loadChildren: () => import('./view/features/search/search.module').then(m => m.SearchModule)
+    loadChildren: () => import('./view/page/search/search.module').then(m => m.SearchModule),
+    canActivate: [IsAuthenticatedGuard]
   },
   {
     path: '**',

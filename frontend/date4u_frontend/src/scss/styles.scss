@@ -23,7 +23,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| JSPicker
+| JSDatepicker
 |--------------------------------------------------------------------------
 */
 @import '~js-datepicker/src/datepicker';
@@ -33,7 +33,7 @@
 | Generally
 |--------------------------------------------------------------------------
 */
-@import "debug";
+// @import "debug";
 
 * {
     margin: 0;
@@ -80,3 +80,4 @@ html, body {
 .footer, .push {
     height: 80px; /* .push must be the same height as .footer */
 }
+

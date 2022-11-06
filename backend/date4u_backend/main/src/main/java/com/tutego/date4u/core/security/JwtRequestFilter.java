@@ -22,7 +22,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private JwtUserDetailsService jwtUserDetailsService;
     private JwtTokenUtil jwtTokenUtil;
 
-    public JwtRequestFilter(JwtUserDetailsService jwtUserDetailsService, JwtTokenUtil jwtTokenUtil) {
+    public JwtRequestFilter(
+            JwtUserDetailsService jwtUserDetailsService,
+            JwtTokenUtil jwtTokenUtil
+    ) {
         this.jwtUserDetailsService = jwtUserDetailsService;
         this.jwtTokenUtil = jwtTokenUtil;
     }

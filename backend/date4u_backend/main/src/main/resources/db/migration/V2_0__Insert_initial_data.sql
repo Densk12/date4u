@@ -21,7 +21,7 @@ INSERT INTO Profile (birthdate, nickname, hornlength, gender, attracted_to_gende
                                                                                                               (DATE '1974-09-27', 'JimShu', 1, 0, 0, 'I want that Mulan McNugget sauce, Morty!', TIMESTAMP '2021-08-17 23:57:58');
 
 INSERT INTO Unicorn (email, password, profile_fk) VALUES
-                                                      ('fillmore.fat@wyman.co', '{noop}u87szdzwr6j', 1),
+                                                      ('fillmore.fat@wyman.co', '$2a$12$bVWFsNlIuO1JyzWymMX6Pe8jF4f4ZiXFSpsY6DMgk7ezjR1iRNwim', 1),
                                                       ('candy.kane@mills.info', '{noop}mk8suwi4kq', 2),
                                                       ('duane.devane@brekke.org', '{noop}7ahntn148svszh', 3),
                                                       ('ali.gaither@littel.io', '{noop}rxp4we85xphdm', 4),

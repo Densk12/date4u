@@ -30,6 +30,7 @@
     "strictTemplates": true
   },
   "include": [
-    "src", "js-datepicker.d.ts"
+    "src",
+    "js-datepicker.d.ts"
   ]
 }

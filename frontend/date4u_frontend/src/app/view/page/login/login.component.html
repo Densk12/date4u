@@ -1,0 +1,43 @@
+<div class="login-comp">
+    <div class="container">
+        <div class="form-container shadow rounded-3 mt-5">
+            <p class="form-container__p display-6">Login</p>
+
+            <form #f="ngForm" (ngSubmit)="onSubmitButtonClicked(f, loginButton)">
+                <div class="mb-3 input-container">
+                    <input ngModel [email]="true" type="text" class="form-control shadow rounded-3" id="input-email"
+                        name="email" autocomplete="email" required>
+                    <label class="form-label" for="input-email">Email</label>
+                    <div class="form-text">Wir werden deine Email-Adresse mit niemandem teilen.</div>
+                </div>
+
+                <div class="mb-3 input-container">
+                    <input ngModel #passwdInput type="password" class="form-control shadow rounded-3" id="input-passwd"
+                        name="password" autocomplete="current-password" minlength="2" required>
+                    <label for="input-passwd" class="form-label">Passwort</label>
+                    <div (click)="onPasswordButtonClicked(passwdInput)">
+                        <i class="fa-sharp fa-solid fa-eye"></i>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button #loginButton type="submit"
+                        class="btn btn-secondary d-flex justify-content-center align-items-center shadow"
+                        [disabled]="!f.valid"><span class="butt-label">Weiter</span>
+
+                        <div class="spinner-border text-dark d-none" role="status">
+                            <span class="sr-only"></span>
+                        </div>
+                    </button>
+                    <div class="register-container">Neu hier? <a [routerLink]="['/register']">Jetzt registrieren!</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="mt-3 error-container" *ngIf="errorMsg.length > 0">
+            <app-error [errorMsg]="errorMsg">
+            </app-error>
+        </div>
+    </div>
+</div>

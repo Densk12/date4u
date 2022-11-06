@@ -2,26 +2,57 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.6.
 
-## Development server
+## Verwendete Kommandos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Starten des Developmentservers
+    ```
+    ng serve --open
+    ```
 
-## Code scaffolding
+- Frontend produktiv builden
+    ```
+    ng build
+    ```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Anlegen eines Moduls
+    ```
+    ng g m path/will/be/also/created/module_name
+    ```
 
-## Build
+- Anlegen einer Komponente
+    ```
+    ng g c path/will/be/also/created/comp_name
+    ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Interceptor anlegen
+    ```
+    ng g interceptor business_logic/service/global-interceptor/global
+    ```
 
-## Running unit tests
+## Installierte Abhängigkeiten
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- JQuery
+    ```
+    npm i jquery
+    npm i @types/jquery --save-dev
+    ```
 
-## Running end-to-end tests
+-  Fontawesome
+    ```
+    npm i @fortawesome/fontawesome-free
+    ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+-  JS-Datepicker
+    ```
+    npm i js-datepicker
+    ```
 
-## Further help
+-  Bootstrap
+    ```
+    npm i bootstrap --save-dev
+    ```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+-  Bootswatch
+    ```
+    npm i bootswatch --save-dev
+    ```

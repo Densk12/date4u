@@ -38,10 +38,10 @@ public class UnicornService {
                     profileData.hornlength(), profileData.gender(),
                     profileData.attractedToGender(), profileData.description(),
                     LocalDateTime.now());
+            profileRepository.save(profile);
 
             Unicorn unicorn = new Unicorn(unicornData.email(), passwordEncoder.encode(unicornData.password()), profile);
-            profile.setUnicorn(unicorn);
-            profileRepository.save(profile);
+            unicornRepository.save(unicorn);
 
             registered = true;
         }

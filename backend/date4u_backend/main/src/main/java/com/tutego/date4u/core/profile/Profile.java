@@ -32,13 +32,13 @@ public class Profile {
     private String description;
     private LocalDateTime lastseen;
 
-    @OneToOne(mappedBy = "profile")
+    @OneToOne(mappedBy = "profile", cascade = CascadeType.ALL)
     private Unicorn unicorn;
 
     @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Photo> photos = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "Likes",
             joinColumns = @JoinColumn(name = "liker_fk"),

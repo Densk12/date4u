@@ -23,6 +23,11 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/scss"
+              ]
+            },
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -30,16 +35,7 @@
             "styles": [
               "src/scss/styles.scss"
             ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/scss"
-              ]
-            },
-            "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/js-datepicker/dist/datepicker.min.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -105,15 +101,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/scss/styles.scss"
+              "src/styles.scss"
             ],
             "scripts": []
           }
         }
       }
     }
-  },
-  "cli": {
-    "analytics": false
   }
 }

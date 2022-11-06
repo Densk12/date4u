@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@CrossOrigin
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtRequestFilter jwtRequestFilter;
@@ -56,12 +55,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf().disable().authorizeRequests()
+        httpSecurity
+                .cors().and()
+                .csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/api/v1/authenticate", "/api/v1/register").permitAll()
                 .anyRequest().authenticated().and()
-
-                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }

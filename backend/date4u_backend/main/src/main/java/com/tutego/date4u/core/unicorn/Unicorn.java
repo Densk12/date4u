@@ -2,6 +2,8 @@ package com.tutego.date4u.core.unicorn;
 
 import com.tutego.date4u.core.profile.Profile;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,13 +12,14 @@ import java.util.Collection;
 @Entity
 @Access(AccessType.FIELD)
 public class Unicorn implements UserDetails {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Email(message = "Email should be valid")
     private String email;
 
+    @Size(min = 2, message = "Password have to have at leat two characters")
     private String password;
 
     @OneToOne

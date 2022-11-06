@@ -1,0 +1,136 @@
+<div id="profile-comp" class="profile container">
+    <div class="nav-header shadow rounded-3">
+        <nav class="nav">
+            <div class="nav__element" *ngIf="isOwnProfile">
+                <a class="nav-link disabled" [routerLink]="['/profile']">Profil</a>
+                <i class="fa-regular fa-user"></i>
+            </div>
+
+            <div class="nav__element" *ngIf="!isOwnProfile">
+                <a class="nav-link" [routerLink]="['/profile', profileId]">Profil</a>
+                <i class="fa-regular fa-user"></i>
+            </div>
+
+            <div class="nav__element">
+                <a class="nav-link" [routerLink]="['/search']">Suche</a>
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            <div class="nav__element">
+                <a class="nav-link" [routerLink]="['/login']" (click)="onLogoutClicked()">Abmelden</a>
+                <i class="fa-sharp fa-solid fa-arrow-right-from-bracket"></i>
+            </div>
+        </nav>
+    </div>
+
+    <div class="main">
+        <form #f="ngForm" (ngSubmit)="onSaveButtonClicked()">
+            <div class="profile-container">
+                <div class="row flex-row-reverse">
+                    <div class="col-sm-6">
+                        <div class="left">
+                            <div class="display-6">
+                                Profil von {{nickname}}
+                            </div>
+
+                            <div class="content">
+                                <div class="birthday-container">
+                                    <p>Geburtstag</p>
+                                    <input #datePickerInput [disabled]="!isOwnProfile" type="date" name="birthday"
+                                        class="form-control shadow rounded-3" [(ngModel)]="birthday">
+                                </div>
+
+                                <div class="horn-container">
+                                    <p>Hornlänge</p>
+                                    <select [disabled]="!isOwnProfile" (change)="onHornlengthSelected()"
+                                        class="rounded-3 shadow" [(ngModel)]="hornlength" name="hornlength">
+                                        <option [value]="i" *ngFor="let i of hornlengths">{{i}} cm</option>
+                                    </select>
+                                </div>
+
+                                <div class="gender-container">
+                                    <p>Geschlecht</p>
+                                    <select [disabled]="!isOwnProfile" (change)="onGenderSelected()" name="gender"
+                                        class="rounded-3 shadow" [(ngModel)]="gender">
+                                        <option [value]="i" *ngFor="let v of genders, let i = index;">{{v}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="interest-in-gender">
+                                    <p>Interesse am Geschlecht</p>
+                                    <select [disabled]="!isOwnProfile" (change)="onAttractedToGenderSelected()"
+                                        name="attracted-to-gender" class="rounded-3 shadow"
+                                        [(ngModel)]="attractedToGender">
+                                        <option [value]="i" *ngFor="let v of genders, let i = index;">{{v}}</option>
+                                    </select>
+                                </div>
+
+                                <textarea ngModel #descriptionTextarea minlength="2" name="description"
+                                    [disabled]="!isOwnProfile" class="form-control shadow rounded-3" rows="10"
+                                    placeholder="Hobbies / Freizeit / Interessen" [(ngModel)]="description"
+                                    required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="right">
+                            <div class="carousel-container">
+                                <div #carousel id="profile-carousel" class="carousel" *ngIf="images.length > 0">
+                                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                        <div class="carousel-inner shadow rounded-3">
+                                            <div class="carousel-item" *ngFor="let image of images">
+                                                <img class="d-block w-100" class="{{image.name}}" alt="First slide">
+                                            </div>
+                                        </div>
+                                        <div class="carousel-control-prev" role="button" data-slide="prev"
+                                            (click)="onPrevCarouselButtonClicked()">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </div>
+                                        <div class="carousel-control-next" role="button" data-slide="next"
+                                            (click)="onNextCarouselButtonClicked()">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="nickname-container">
+                                <input ngModel #nicknameInput minlength="2" name="nickname" [disabled]="!isOwnProfile"
+                                    [(ngModel)]="nickname" class="shadow rounded-3" placeholder="Nickname" type="text"
+                                    maxlength="20" required>
+                            </div>
+
+                            <div *ngIf="isOwnProfile" class="new-photo-container">
+                                <label for="profile-upload-photo-input">Neues Bild hochladen</label>
+                                <input name="photo" id="profile-upload-photo-input" type="file" accept="image/jpeg"
+                                    (change)="onInputPhotoAddClicked($event)">
+                            </div>
+
+                            <div *ngIf="!isOwnProfile" class="like-container">
+                                <i #like class="fa-regular fa-thumbs-up animated" (click)="onLikeClicked(like)"></i>
+                            </div>
+
+                            <div *ngIf="isOwnProfile" class="butt-container">
+                                <button #saveButton [disabled]="!(attributesChanged && f.valid)" type="submit"
+                                    class="btn btn-primary shadow">Speichern
+                                    <div class="spinner-border text-dark d-none" role="status">
+                                        <span class="sr-only"></span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div *ngIf="isOwnProfile" class="delete-profile-container">
+            <button #deleteButton (click)="onDeleteProfileButtonClicked()" type="button" class="btn btn-primary shadow">Profil löschen
+                <div class="spinner-border text-dark d-none" role="status">
+                    <span class="sr-only"></span>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>

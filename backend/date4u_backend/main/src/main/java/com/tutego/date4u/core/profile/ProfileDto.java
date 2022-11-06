@@ -1,17 +1,36 @@
 package com.tutego.date4u.core.profile;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 public record ProfileDto(
+        @NotNull
+        @Min(1)
         Long id,
+        @NotEmpty
+        @Size(min = 2)
         String nickname,
-        @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate birthday,
+        @NotNull
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
+        LocalDate birthday,
+        @NotNull
+        @Min(0)
+        @Max(3)
         Integer hornlength,
+        @NotNull
+        @Min(0)
+        @Max(3)
         Integer gender,
-        @JsonProperty("attracted-to-Gender") Integer attractedToGender,
+        @NotNull
+        @Min(0)
+        @Max(3)
+        @JsonProperty("attracted-to-gender")
+        Integer attractedToGender,
+        @NotEmpty
+        @Size(min = 2)
         String description
 ) {
     public static ProfileDto fromDomain(Profile profileDomain) {
